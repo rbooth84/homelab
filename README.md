@@ -1,9 +1,9 @@
 # Kubernetes Setup
 This will guide you on how to setup Kubernetes with the following features using K3s.
 
-- [Rancher](https://www.rancher.com/) as a Front-End
+- [Rancher](https://www.rancher.com/) as a UI for the cluster.
 - [Longhorn](https://longhorn.io/) for storage
-- [cert-manager](https://cert-manager.io/) for Let's Encrypt Certs
+- [cert-manager](https://cert-manager.io/) for Let's Encrypt Certs with Cloudflare DNS Validation
 - [Ingress-NGINX](https://github.com/kubernetes/ingress-nginx) as a reverse proxy into the cluster
 - [kube-vip](https://kube-vip.io/) as a LoadBalancer for the Control Plane
 - [MetalLB](https://metallb.universe.tf/) as a LoadBalancer for Services
@@ -66,7 +66,7 @@ At this point we have a working kubernetes install without anything setup on it.
     kubectl apply -f https://kube-vip.io/manifests/rbac.yaml
     ```
 
-2. Setup the variables required for Generating the Kube-VIP Manifest
+2. Setup the variables required for Generating the Kube-VIP Manifest. Change `172.16.0.10` to the IP you want to use for kube-vip virtual ip. It will be the same ip that you used as the `--tls-san`
     ```bash
     export VIP=172.16.0.10
     export INTERFACE=$(ip route | grep default | awk '{print $5}')
@@ -85,7 +85,7 @@ At this point we have a working kubernetes install without anything setup on it.
         --arp \
         --leaderElection > kube-vip.yaml
     ```
-    If using `--services` to use kube-vip instead of MetalLB run the following commands replacing the ip range wiith your:
+    If using `--services` to use kube-vip instead of MetalLB run the following commands replacing the ip range wiith yours:
     ```bash
     kubectl apply -f https://raw.githubusercontent.com/kube-vip/kube-vip-cloud-provider/main/manifest/kube-vip-cloud-controller.yaml
     kubectl create configmap -n kube-system kubevip --from-literal range-global=172.16.8.11-172.16.8.254
@@ -98,7 +98,7 @@ At this point we have a working kubernetes install without anything setup on it.
 5. Verify that the Virtual IP is working
    - Run `kubectl get pods -n kube-system`
      - You should see a pod with a name that starts with `kube-vip-ds-` and it should have a running status
-   - Open your browser to https://172.16.0.10:6443/. The browser will give you some security warnings about not being secure.
+   - Open your browser to your kube-vip ip e.g. https://172.16.0.10:6443/. The browser will give you some security warnings about not being secure.
 
 ## Install MetalLB
 If you chose to use Kube-VIP for services this can be skipped
@@ -141,21 +141,26 @@ If you chose to use Kube-VIP for services this can be skipped
     You should see a single controller pod and a speaker pod for each node.
 
 ## Patch local-storage
-The way k3s works it automaticly applys the mainfests files located in `/var/lib/rancher/k3s/server/manifests/`. Since we will be setting up longhorn later and want that to be our default storage provider we should change `is-default-class` setting in the `local-storage.yaml` file so that it does not change our setting later if you reboot or restart the k3s service on this node. We will need to apply this change to each node in the cluster as we install k3s.
+The way k3s works it automaticly applys the mainfests files located in `/var/lib/rancher/k3s/server/manifests/`. Since we will be setting up longhorn later and want that to be our default storage provider we should change the `is-default-class` setting in the `local-storage.yaml` file so that it does not change our setting later if you reboot or restart the k3s service on this node. We will need to apply this change to each node in the cluster as we install k3s.
 
-If you run the following command you can see the storage class. 
+If you run the following command you can see the storage classes on the cluster and see that local-storage is setup as the default.
 ```bash
 kubectl get storageclass
 ```
 
-Run this command to patch the file:
+Run this command to patch the file. This will change the setting to `false`
 ```bash
 sudo sed -i 's/storageclass.kubernetes.io\/is-default-class: "true"/storageclass.kubernetes.io\/is-default-class: "false"/' "/var/lib/rancher/k3s/server/manifests/local-storage.yaml"
 ```
 
-Now lets path it in the cluster:
+Now lets patch it in the cluster:
 ```bash
 kubectl patch storageclass local-path -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
+```
+
+Run this command again and you will see it is no longer the default storage class
+```bash
+kubectl get storageclass
 ```
 
 ## Get the cluster token
@@ -236,12 +241,11 @@ This command list installed releases on your cluster. The list will be empty sin
 At this point the cluster should be up and running and we can access it from our local machine. The rest of the guide will assume that you are running the commands from a windows machine.
 
 ## Installing Longhorn
-1. Install the helm repo:
+1. Setup the helm repo
     ```powershell
     helm repo add longhorn https://charts.longhorn.io 
     helm repo update
     ```
-
 2. Install the Helm Chart
     ```powershell
     helm install longhorn longhorn/longhorn --namespace longhorn-system --create-namespace
@@ -253,7 +257,7 @@ At this point the cluster should be up and running and we can access it from our
     After a few seconds you should see all the pods for longhorn become ready.
 
 ### Accessing the longhorn UI
-Since we dont currently have ingress-nginx installed on the cluster we will setup a NodePort so we can access the UI so we can take a look.
+Since we don't currently have ingress-nginx installed on the cluster we will setup a NodePort Service so we can access the UI so we can take a look.
 
 Create a file called `longhorn-service.yaml`
 ```yaml
@@ -279,8 +283,7 @@ Apply the manifest
 kubectl apply -f longhorn-service.yaml
 ```
 
-This will create a NodePort service that that you can use any node in your cluster to access by the port. Access the UI from any node e.g. http://172.16.8.1:30080/. If everything is working you should see the dasboard.
-
+This will create a NodePort Service that that you can access from any node the cluster. Access the UI from using the initial server e.g. http://172.16.8.1:30080/. If everything is working you should see the dasboard.
 
 Remove the service once you are done.
 ```powershell
