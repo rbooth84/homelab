@@ -18,7 +18,7 @@ You will need the following:
 - 1 IP to assign to kube-vip for the Control Plan
 - IP Range to assign to MetalLB or kube-vip
 
-      MetalLB is optional and you can just use kube-vip to handle load balancing for both the control plan and services. I chose to go with MetalLB because of some issues that I ran into with my homelab while using kube-vip. This guide will step you through setting up either one.
+> **_NOTE:_**  MetalLB is optional and you can just use kube-vip to handle load balancing for both the control plan and services. I chose to go with MetalLB because of some issues that I ran into with my homelab while using kube-vip. This guide will step you through setting up either one.
 
 ## Planning
 Start by figuring out which IP you would like to assign to kube-vip for the control plan and a IP range that you would like to use for the Load Balancer, You will need atleast 2 in this range to follow my guide.
