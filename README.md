@@ -7,7 +7,7 @@ This guide provides a detailed, step-by-step walkthrough of how I’ve set up an
 1. [Kubernetes Cluster Setup](Kubernetes-Cluster-Setup.md)
 2. [PostgreSQL High Availability Cluster using CloudNativePG](CloudNativePG.md)
 3. [Single sign-on (SSO) using Authentik](Authentik.md)
-4. [Exposing External Services through Ingress](External-Ingress.md)
+4. [Exposing External Services through Kubernetes Ingress](External-Ingress.md)
 
 ## Hardware
 
