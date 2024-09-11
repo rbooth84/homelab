@@ -14,6 +14,10 @@ I have a free [mailgun](https://www.mailgun.com/) account that I use for sending
 
 2. Setup a database and user in the `postgres-cluster` created with [CloudNativePG](CloudNativePG.md)
 
+    - Use [this](https://www.enterprisedb.com/postgres-tutorials/how-create-postgresql-database-and-users-using-psql-and-pgadmin) guide if you need instructions
+    - Database: `authentik`
+    - User: `authentik`
+
 3. Create a namespace
 
     ```powershell
@@ -110,7 +114,7 @@ I have a free [mailgun](https://www.mailgun.com/) account that I use for sending
 
 The first time it starts up it might take a few minutes as it gets everything up and running.
 
-Once the application is up you can start access the setup screen at https://auth.mydomain.org/if/flow/initial-setup/ to finish setup.
+Once the application is up you can access the setup screen at https://auth.mydomain.org/if/flow/initial-setup/ to finish setup.
 
 ## Longhorn Ingress Secured with Authentik
 
@@ -123,7 +127,7 @@ Now that we have a working install of Authentik lets setup ingress for longhorn 
 3. On the top click the `Create With Wizard` button
 4. Application Details
     - Name: `Longhorn`
-    - Slug: 'longhorn'
+    - Slug: `longhorn`
     - UI Settings -> Launch URL: https://longhorn.mydomain.org
     - Click `Next`
 5. Provider Type: Select `Forward Auth (Single Application)` then click `Next`

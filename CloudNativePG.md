@@ -105,6 +105,6 @@ You should now be connected to the postgres cluster that you created using the C
 
 ## Links
 
-- [Quick Start Guid](https://cloudnative-pg.io/documentation/1.16/quickstart/)
+- [Quick Start Guide](https://cloudnative-pg.io/documentation/1.16/quickstart/)
 - [Documentation](https://cloudnative-pg.io/documentation/1.24/)
 - [Github Repo](https://github.com/cloudnative-pg/cloudnative-pg/)
