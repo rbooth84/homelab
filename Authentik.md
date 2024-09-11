@@ -1,4 +1,4 @@
-# Authentik
+# Single sign-on (SSO) with Authentik
 
 This will guide on on setting up [Authentik](https://goauthentik.io/) in the Kubernetes cluster to enable Single sign-on (SSO) in your environment.
 

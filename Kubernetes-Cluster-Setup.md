@@ -1,4 +1,4 @@
-# Kubernetes Setup
+# Kubernetes Cluster Setup
 This will guide you on how to setup Kubernetes with the following features using K3s.
 
 - [Rancher](https://www.rancher.com/) as a UI for the cluster.

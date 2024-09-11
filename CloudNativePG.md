@@ -1,4 +1,4 @@
-# CloudNativePG
+# Postgres HA Cluster using CloudNativePG
 
 This will guide you on setting up [CloudNativePG](https://cloudnative-pg.io/) in Kubernetes to create a 3 node HA Postgres cluster.
 
