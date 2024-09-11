@@ -92,7 +92,7 @@ Run the following command
 kubectl get endpoints,service,ingress external-gitea
 ```
 
-You will see an output that looks like thiis
+You will see an output that looks like this
 
 ```
 NAME                       ENDPOINTS         AGE
