@@ -2,6 +2,8 @@
 
 This will guide on on setting up [Authentik](https://goauthentik.io/) in the Kubernetes cluster to enable Single sign-on (SSO) in your environment.
 
+Before setting up Authentik you should have a working High Availability Postgres Cluster. You can follow my guide [here](CloudNativePG.md)
+
 ## Install
 
 I have a free [mailgun](https://www.mailgun.com/) account that I use for sending emails. When setting up change the settings to match your smtp provider settings.

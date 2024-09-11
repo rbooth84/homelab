@@ -334,7 +334,7 @@ Remove the service once you are done.
 kubectl delete -f longhorn-service.yaml
 ```
 
-Longhorn does not have any built in security. In another guide we will configure ingress and secure it using [Authentik](https://goauthentik.io/).
+Longhorn does not have any built in security. After you complete the kubernetes setup follow [my guide](Authentik.md) on setting up [Authentik](https://goauthentik.io/) which also includes setting up ingress for Longhorn with SSO.
 
 ## Install Cert-Manager
 
