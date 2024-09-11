@@ -7,7 +7,8 @@ This is a step by step guide on how my homelab is setup and configured.
 
 - OPNsense Router
     - HP T620+
-        - 256gb ssd
+        - 12gb RAM
+        - 256gb SSD
         - 4 port Intel NIC Card
 - Siwtch
     - Zyxel 24-Port Gigabit Switch
@@ -20,8 +21,8 @@ This is a step by step guide on how my homelab is setup and configured.
 - Proxmox Cluster
     - 5x Lenovo ThinkCentre M910Q
         - i7-7700T Processor
-        - 64gb RAM
-        - 500gb NVMe
+        - 64GB RAM
+        - 500GB NVMe
 - Development Kubernetes Cluster
     - 4x Raspberry Pi 4 8GB
 
@@ -63,7 +64,7 @@ This is a step by step guide on how my homelab is setup and configured.
 
 ## Remote Access
 
-Remote Access is all connected using Tailscale.
+Remote Access is all achieved using Tailscale.
 
 ## Kubernetes Cluster Setup Guides
 
