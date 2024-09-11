@@ -25,6 +25,10 @@ This is a step by step guide on how my homelab is setup and configured.
         - 500GB NVMe
 - Development Kubernetes Cluster
     - 4x Raspberry Pi 4 8GB
+- Remote Backups - Hosted at Parents house
+    - Synology 220+
+        - 16gb RAM
+        - 2x TB in RAID1
 
 ## Software
 
@@ -62,9 +66,19 @@ This is a step by step guide on how my homelab is setup and configured.
         - ArgoCD
         - Artifactory
 
-## Remote Access
+## Access
 
-Remote Access is all achieved using Tailscale.
+### Public Access
+
+Some services I like to expose directly to the internet. This is this is achieved by having a dedicated external ingress controller setup in kubernetes and exposing it to the internet using NAT in the router.
+
+### Remote Access
+
+Remote Access is achieved using Tailscale.
+
+In Kubernetes I setup the Tailscale Operator and connected it to my internal ingress controller. Ingress is setup for all of my services inside and outside of my cluster to handle the remote connections.
+
+For backups I have Tailscale installed on both Synology devices to allow secure connections to handle Hyper Backup and S3 Replication in MinIO.
 
 ## Kubernetes Cluster Setup Guides
 
