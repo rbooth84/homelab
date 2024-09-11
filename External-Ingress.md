@@ -84,7 +84,7 @@ spec:
 kubectl apply -f gitea-ingress.yaml
 ```
 
-### Take a closer Look
+### Taking a closer Look
 
 Run the following command
 
