@@ -2,6 +2,12 @@
 
 This guide provides a detailed, step-by-step walkthrough of how I’ve set up and configured my homelab. From hardware selection to software deployment and access management, you’ll get an inside look at how everything fits together. Whether you're looking to replicate my setup or gain insights for your own, this guide covers the essentials of running a robust and flexible homelab environment.
 
+## Kubernetes Cluster Setup Guides
+
+1. [Kubernetes Cluster Setup](Kubernetes-Cluster-Setup.md)
+2. [PostgreSQL High Availability Cluster using CloudNativePG](CloudNativePG.md)
+3. [Single sign-on (SSO) using Authentik](Authentik.md)
+4. [Exposing External Services through Ingress](External-Ingress.md)
 
 ## Hardware
 
@@ -79,10 +85,3 @@ Remote Access is achieved using Tailscale.
 In Kubernetes I setup the Tailscale Operator and connected it to my internal ingress controller. Ingress is setup for all of my services inside and outside of my cluster to handle the remote connections.
 
 For backups I have Tailscale installed on both Synology devices to allow secure connections to handle Hyper Backup and S3 Replication in MinIO.
-
-## Kubernetes Cluster Setup Guides
-
-1. [Kubernetes Cluster Setup](Kubernetes-Cluster-Setup.md)
-2. [PostgreSQL High Availability Cluster using CloudNativePG](CloudNativePG.md)
-3. [Single sign-on (SSO) using Authentik](Authentik.md)
-4. [Exposing External Services through Ingress](External-Ingress.md)
