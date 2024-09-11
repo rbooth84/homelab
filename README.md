@@ -85,3 +85,4 @@ For backups I have Tailscale installed on both Synology devices to allow secure 
 1. [Kubernetes Cluster](Kubernetes-Install.md)
 2. [Postgres HA Cluster using CloudNativePG](CloudNativePG.md)
 3. [Single sign-on (SSO) with Authentik](Authentik.md)
+4. [Exposing External Services through Ingress](External-Ingress.md)
