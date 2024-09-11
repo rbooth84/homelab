@@ -1,6 +1,6 @@
 # Homelab
 
-This is a step by step guide on how my homelab is setup and configured.
+This guide provides a detailed, step-by-step walkthrough of how I’ve set up and configured my homelab. From hardware selection to software deployment and access management, you’ll get an inside look at how everything fits together. Whether you're looking to replicate my setup or gain insights for your own, this guide covers the essentials of running a robust and flexible homelab environment.
 
 
 ## Hardware
