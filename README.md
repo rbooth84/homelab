@@ -2,12 +2,33 @@
 
 This guide provides a detailed, step-by-step walkthrough of how I’ve set up and configured my homelab. From hardware selection to software deployment and access management, you’ll get an inside look at how everything fits together. Whether you're looking to replicate my setup or gain insights for your own, this guide covers the essentials of running a robust and flexible homelab environment.
 
-## Kubernetes Cluster Setup Guides
+## Environment Setup
 
-1. [Kubernetes Cluster Setup](Kubernetes-Cluster-Setup.md)
-2. [PostgreSQL High Availability Cluster using CloudNativePG](CloudNativePG.md)
-3. [Single sign-on (SSO) using Authentik](Authentik.md)
-4. [Exposing External Services through Kubernetes Ingress](External-Ingress.md)
+1. [Technitium DNS Server](Technitium-DNS-Server.md)
+
+## Kubernetes Cluster
+
+### Features
+
+- [Rancher](https://www.rancher.com/) as a UI for the cluster.
+- [Longhorn](https://longhorn.io/) for storage
+- [cert-manager](https://cert-manager.io/) for Let's Encrypt Certs with Cloudflare DNS Validation
+- [Ingress-NGINX](https://github.com/kubernetes/ingress-nginx) as a reverse proxy into the cluster
+- [kube-vip](https://kube-vip.io/) as a LoadBalancer for the Control Plane
+- [MetalLB](https://metallb.universe.tf/) as a LoadBalancer for Services
+- [Tailscale Kubernetes Operator](https://tailscale.com/kb/1236/kubernetes-operator) for Remote Access
+- [CloudNativePG](https://cloudnative-pg.io/) for Highly Available PostgreSQL
+- [Authentik](https://cloudnative-pg.io/) for Single sign-on (SSO)
+
+
+### Setup
+
+1. [Cluster Setup](k8s/Kubernetes-Cluster-Setup.md)
+2. [Local Cluster Access](k8s/Local-Cluster-Access.md)
+3. [Cluster Software](k8s/Cluster-Software.md)
+2. [CloudNativePG](k8s/CloudNativePG.md)
+3. [Authentik](k8s/Authentik.md)
+4. [Exposing External Services with Ingress](k8s/External-Ingress.md)
 
 ## Hardware
 
